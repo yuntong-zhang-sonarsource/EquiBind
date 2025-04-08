@@ -751,10 +751,7 @@ class IEGMN(nn.Module):
 
         h_feats_lig = self.lig_atom_embedder(lig_graph.ndata['feat'])
 
-        if self.use_rec_atoms:
-            h_feats_rec = self.rec_embedder(rec_graph.ndata['feat'])
-        else:
-            h_feats_rec = self.rec_embedder(rec_graph.ndata['feat'])  # (N_res, emb_dim)
+        h_feats_rec = self.rec_embedder(rec_graph.ndata['feat'])
 
         rand_dist = torch.distributions.normal.Normal(loc=0, scale=self.random_vec_std)
         rand_h_lig = rand_dist.sample([h_feats_lig.size(0), self.random_vec_dim]).to(self.device)

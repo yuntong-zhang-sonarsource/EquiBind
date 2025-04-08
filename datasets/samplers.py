@@ -26,8 +26,8 @@ class HardSampler(Sampler[List[int]]):
     def __iter__(self):
         batch = []
         for idx in self.standard_sampler:
-            if len(batch)<= self.num_hard_samples and len(self.current_hard_indices) >= 0:
-                batch.append(self.current_hard_indices[torch.randint(low=0, high=len(self.current_hard_indices),size=(1,))])
+            if len(batch) <= self.num_hard_samples and len(self.current_hard_indices) > 0:
+                batch.append(self.current_hard_indices[torch.randint(low=0, high=len(self.current_hard_indices), size=(1,))])
             else:
                 batch.append(idx)
             if len(batch) == self.batch_size:
